@@ -1,0 +1,8 @@
+ul
+  - @models.each do |model|
+    li
+      = model.class_name
+      ul
+        - model.properties.each do |property|
+          li = property.name + "(#{property.type})"
+  

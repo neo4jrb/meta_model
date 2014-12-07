@@ -1,0 +1,10 @@
+
+= render partial: 'record_details', locals: {record: @record}
+
+- @model.associations.each do |name, association|
+  h2 = name.to_s.humanize
+  div
+    - result = @record.send(name)
+    - result = result.respond_to?(:each) ? result.to_a : [result]
+    - result.each do |sub_record|
+      = render partial: 'record_details', locals: {record: sub_record, link: true}
