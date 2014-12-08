@@ -1,0 +1,5 @@
+h2 Models
+
+div.list-group
+  - @models.each do |model|
+    = link_to model.class_name, models_path(model: model), class: 'list-group-item'

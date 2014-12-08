@@ -9,4 +9,8 @@ class Model
   has_many :out, :properties, type: :has_property
 
   has_many :out, :assocs, type: :has_association, model_class: 'Assoc'
+
+  def to_param
+    self.class_name
+  end
 end

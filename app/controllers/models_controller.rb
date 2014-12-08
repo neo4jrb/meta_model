@@ -1,7 +1,13 @@
 class ModelsController < ApplicationController
   before_action :get_model
+  before_action :get_meta_model
+
+  def meta_index
+    @models = Model.order(:class_name)
+  end
 
   def index
+    @records = @model.all.to_a
   end
 
   def show
@@ -14,10 +20,18 @@ class ModelsController < ApplicationController
 
   private
 
+  def get_meta_model
+    @meta_model = Model.where(class_name: model_param_class_name).first if model_param_class_name
+  end
+
   def get_model
-    class_name = params[:model].classify
-    @meta_model = Model.where(class_name: class_name).first
-    @model = class_name.constantize
+    @model = model_param_class_name.constantize if model_param_class_name
+  end
+
+  def model_param_class_name
+    if params[:model]
+      @model_param_class_name ||= params[:model].classify
+    end
   end
 end
 

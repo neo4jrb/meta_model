@@ -1,0 +1,9 @@
+ol.breadcrumb
+  li = link_to 'Models', meta_models_path
+  li = @meta_model.class_name.pluralize
+
+h2 = @meta_model.class_name.pluralize
+
+div.list-group
+  - @records.each do |record|
+    = link_to record._description, model_path(id: record), class: 'list-group-item'

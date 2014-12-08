@@ -8,6 +8,7 @@ models.each do |model|
   code << "\n"
 
   code << "  include Neo4j::ActiveNode\n"
+  code << "  include ModelBase\n"
 
 
   model.properties.each do |property|

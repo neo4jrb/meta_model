@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :models
   end
 
+
   resources :models, path: '/models/:model'
+  get '/models' => 'models#meta_index', as: :meta_models
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
