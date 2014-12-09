@@ -1,18 +1,18 @@
 PATH
   remote: /Users/brian/github/neo4jrb/neo4j
   specs:
-    neo4j (3.0.4)
+    neo4j (4.0.0.rc.1)
       active_attr (~> 0.8)
       activemodel (~> 4)
       activesupport (~> 4)
-      neo4j-core (~> 3.0.8)
+      neo4j-core (~> 3.1.0)
       orm_adapter (~> 0.5.0)
       railties (~> 4)
 
 PATH
   remote: /Users/brian/github/neo4jrb/neo4j-core
   specs:
-    neo4j-core (3.0.8)
+    neo4j-core (3.1.0)
       activesupport
       faraday (~> 0.9.0)
       faraday_middleware (~> 0.9.1)

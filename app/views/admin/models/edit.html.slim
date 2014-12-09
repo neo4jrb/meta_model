@@ -1,0 +1,26 @@
+= form_tag({action: :update}, method: :put, class: 'form-horizontal', role: :form) do
+
+  .form-group
+    label
+      .col-sm-2.control-label Class Name
+      .col-sm-10 = text_field_tag 'model_data[class_name]', @model.class_name, class: 'form-control'
+
+  h2 Properties
+  - @model.properties.each do |property|
+    .well.property
+      .form-group
+        label
+          .col-sm-2.control-label Name
+          .col-sm-10 = text_field_tag 'model_data[properties][][name]', property.name, class: 'form-control'
+
+      .form-group
+        label
+          .col-sm-2.control-label Type
+          .col-sm-10 = select_tag 'model_data[properties][][type]', options_for_select(['String', 'DateTime'], property.type), class: 'form-control'
+
+  = submit_tag
+
+scss:
+  label {
+    width: 100%;
+  }

@@ -1,0 +1,21 @@
+doctype html
+html
+head
+  title MetaModel
+
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+
+body
+
+  nav.navbar.navbar-default role="navigation"
+    .container-fluid
+      ul.nav.navbar-nav
+        - {Records: meta_models_path, Admin: admin_root_path}.each do |text, path|
+          li class=(request.fullpath == path ? :active : '') = link_to text, path
+
+
+  .container
+    = yield
+

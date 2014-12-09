@@ -1,7 +1,7 @@
 ul
   - @models.each do |model|
     li
-      = model.class_name
+      = link_to model.class_name, edit_admin_model_path(model: model)
       ul
         - model.properties.each do |property|
           li = property.name + "(#{property.type})"

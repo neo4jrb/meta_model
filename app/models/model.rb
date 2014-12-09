@@ -11,6 +11,6 @@ class Model
   has_many :out, :assocs, type: :has_association, model_class: 'Assoc'
 
   def to_param
-    self.class_name
+    self.class_name.tableize
   end
 end

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
   namespace :admin do
-    resources :models
+    resources :models, path: '/models', param: :model
+    root 'models#index'
   end
 
 
-  resources :models, path: '/models/:model'
-  get '/models' => 'models#meta_index', as: :meta_models
+  resources :models, path: '/:model'
+  root 'models#meta_index', as: :meta_models
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
