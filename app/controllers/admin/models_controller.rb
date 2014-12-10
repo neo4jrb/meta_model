@@ -13,7 +13,21 @@ module Admin
       @model.class_name = params[:model_data][:class_name]
       @model.save
 
-      redirect_to action: :edit
+      specified_property_name = []
+      params[:model_data][:properties].each do |property_params|
+        name = property_params[:name]
+        specified_property_name << name
+
+        (@model.properties.where(name: name).first || Property.new(name: name, model: @model)).tap do |property|
+          property_params.each do |attribute, value|
+            property.write_attribute(attribute, value)
+          end
+        end.save
+      end
+
+      @model.properties(:property).query.where("NOT(property.name IN {names})").params(names: specified_property_name).pluck(:property).each(&:destroy)
+
+      redirect_to action: :edit, model: @model
     end
 
     private

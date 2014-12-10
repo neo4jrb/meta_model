@@ -6,4 +6,7 @@ class Property
 
   validates_inclusion_of :type, :in => %w( String DateTime Boolean Integer )
 
+  has_one :in, :model, origin: :properties
+
 end
+
