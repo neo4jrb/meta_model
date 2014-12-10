@@ -8,7 +8,7 @@
   .properties.row
     h2
       | Properties 
-      a#add-property.btn.btn-default Add Property
+      a.add.btn.btn-default Add Property
 
     - @model.properties.each do |property|
       .well.property.col-sm-6
@@ -24,6 +24,42 @@
             .col-sm-2.control-label Type
             .col-sm-10 = select_tag 'model_data[properties][][type]', options_for_select(['String', 'DateTime'], property.type), class: 'form-control'
 
+
+  .associations.row
+    h2
+      | Associations 
+      a.add.btn.btn-default Add Assocation
+
+    - @model.assocs.each do |assoc|
+      .well.association.col-sm-6
+        i.glyphicon.glyphicon-remove-circle.close.pull-right
+
+        .form-group
+          label
+            .col-sm-2.control-label Name
+            .col-sm-10 = text_field_tag 'model_data[associations][][name]', assoc.name, class: 'form-control'
+
+        .form-group
+          label
+            .col-sm-2.control-label Has
+            .col-sm-10 = select_tag 'model_data[associations][][has]', options_for_select(['one', 'many'], assoc.has), class: 'form-control'
+
+        .form-group
+          label
+            .col-sm-2.control-label Direction
+            .col-sm-10 = select_tag 'model_data[associations][][direction]', options_for_select(['in', 'out'], assoc.direction), class: 'form-control'
+
+        .form-group
+          label
+            .col-sm-2.control-label Relationship Type
+            .col-sm-10 = text_field_tag 'model_data[associations][][type]', assoc.type, class: 'form-control'
+
+        .form-group
+          label
+            .col-sm-2.control-label Model Class
+            .col-sm-10 = text_field_tag 'model_data[associations][][model_class]', assoc.model_class, class: 'form-control'
+
+          
 
   = submit_tag nil, class: 'btn btn-primary'
 
