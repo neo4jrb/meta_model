@@ -60,7 +60,8 @@
             .col-sm-10 = select_tag 'model_data[associations][][model_class]', options_from_collection_for_select(([OpenStruct.new] + @models.to_a), 'class_name', 'class_name', assoc.model_class), class: 'form-control'
 
 
-  = submit_tag nil, class: 'btn btn-primary'
+  .form-group
+    = submit_tag 'Update', class: 'btn btn-primary'
 
 scss:
   label {

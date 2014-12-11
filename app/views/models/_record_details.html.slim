@@ -1,6 +1,9 @@
 - link ||= false
 
-= link_to 'Link', controller: :models, action: :show, model: record.class.to_s.tableize, id: record.id if link
+= link_to 'View', {action: :show, model: record.class.to_s.tableize, id: record.id}, class: 'btn btn-default' if link
+
+= link_to 'Edit', {action: :edit, model: record.class.to_s.tableize, id: record.id}, class: 'btn btn-default'
+
 dl.dl-horizontal
   - record.attributes.each do |key, value|
     dt = key

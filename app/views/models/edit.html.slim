@@ -1,7 +1,10 @@
 
-= form_tag({action: :update}, class: 'form-horizontal', role: 'form') do
+= form_tag({action: :update}, method: 'put', class: 'form-horizontal', role: 'form') do
   - @record.attributes.each do |key, value|
     .form-group
       label.control-label.col-sm-2 = key.humanize
-      .col-sm-10 = text_field_tag key, value, class: 'form-control'
+      .col-sm-10 = text_field_tag "data[#{key}]", value, class: 'form-control'
 
+
+  .form-group
+    = submit_tag 'Update', class: 'btn btn-primary'

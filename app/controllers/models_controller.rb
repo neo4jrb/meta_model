@@ -1,6 +1,7 @@
 class ModelsController < ApplicationController
   before_action :get_model
   before_action :get_meta_model
+  before_action :get_record, only: [:show, :edit, :update]
 
   def meta_index
     @models = Model.order(:class_name)
@@ -11,14 +12,22 @@ class ModelsController < ApplicationController
   end
 
   def show
-    @record = @model.find(params[:id])
   end
 
   def edit
-    @record = @model.find(params[:id])
+  end
+
+  def update
+    @record.update_attributes(params[:data])
+
+    redirect_to action: :show
   end
 
   private
+
+  def get_record
+    @record = @model.find(params[:id])
+  end
 
   def get_meta_model
     @meta_model = Model.where(class_name: model_param_class_name).first if model_param_class_name
