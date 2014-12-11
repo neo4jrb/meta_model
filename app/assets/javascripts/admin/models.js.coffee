@@ -18,5 +18,8 @@ ready = ->
   $('.property .close').click ->
     $(this).parent('.property').remove()
 
+  $('.association .close').click ->
+    $(this).parent('.association').remove()
+
 $(document).ready ready
 $(document).on 'page:load', ready

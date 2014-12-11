@@ -16,7 +16,8 @@ models.each do |model|
   end
 
   model.assocs.each do |assoc|
-    code << "  has_#{assoc.has} :#{assoc.direction}, :#{assoc.name}, type: #{assoc.type.inspect}, model_class: #{assoc.model_class.inspect}, origin: #{assoc.origin.inspect}\n"
+    options = {type: assoc.type, model_class: assoc.model_class, origin: assoc.origin}
+    code << "  has_#{assoc.has} :#{assoc.direction}, :#{assoc.name}, #{options.inspect}\n"
   end
 
   code << "end"

@@ -11,4 +11,7 @@ class Assoc
   validates_inclusion_of :has, :in => %w( one many )
   validates_inclusion_of :direction, :in => %w( in out )
 
+  validates :model_class, presence: true
+
+  has_one :in, :model, origin: :assocs
 end
