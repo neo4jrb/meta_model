@@ -6,4 +6,7 @@ h2 = @meta_model.class_name.pluralize
 
 div.list-group
   - @records.each do |record|
-    = link_to record._description, model_path(id: record), class: 'list-group-item'
+    = link_to model_path(id: record), class: 'list-group-item' do
+      - if record.class != @model
+        span.badge = record.class.to_s
+      = record._description

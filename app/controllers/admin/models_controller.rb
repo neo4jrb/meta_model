@@ -3,7 +3,7 @@ module Admin
     before_action :get_model, only: [:edit, :update]
 
     def index
-      @models = Model.all
+      @hierarchy = Model.all.hierarchically
     end
 
     def edit

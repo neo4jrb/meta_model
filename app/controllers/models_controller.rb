@@ -4,7 +4,7 @@ class ModelsController < ApplicationController
   before_action :get_record, only: [:show, :edit, :update]
 
   def meta_index
-    @models = Model.order(:class_name)
+    @hierarchy = Model.order(:class_name).hierarchically
   end
 
   def index
