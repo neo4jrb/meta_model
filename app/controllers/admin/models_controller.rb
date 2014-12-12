@@ -12,11 +12,12 @@ module Admin
 
     def update
       @model.class_name = params[:model_data][:class_name]
+      @model.superclass_model = Model.where(class_name: params[:model_data][:superclass_model]).first
       @model.save
 
       # Properties
       specified_property_names = []
-      params[:model_data][:properties].each do |property_params|
+      (params[:model_data][:properties] || []).each do |property_params|
         name = property_params[:name]
         specified_property_names << name
 
@@ -30,7 +31,7 @@ module Admin
 
       # Assocations
       specified_assocation_names = []
-      params[:model_data][:associations].each do |association_params|
+      (params[:model_data][:associations] || []).each do |association_params|
         name = association_params[:name]
         specified_assocation_names << name
 
