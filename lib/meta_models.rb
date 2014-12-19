@@ -1,5 +1,6 @@
 
-models = Model.query_as(:model).match("p=model-[:inherits_from*0..]-()").order("max(length(p))").pluck(:model, 'max(length(p))').map(&:first)
+#models = Model.query_as(:model).match("p=model-[:inherits_from*0..]-()").order("max(length(p))").pluck(:model, 'max(length(p))').map(&:first)
+models = Model.hierarchically.to_a_recursive.flatten
 
 
 models.each do |model|
@@ -9,7 +10,6 @@ models.each do |model|
 
   code << "  include Neo4j::ActiveNode\n"
   code << "  include ModelBase\n"
-
 
   model.properties.each do |property|
     code << "  property :#{property.name}, type: #{property.type}\n"

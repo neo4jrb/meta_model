@@ -3,10 +3,12 @@ class Model < MetaModelBase
 
   has_one :out, :superclass_model, type: :inherits_from, model_class: 'Model'
 
-  has_one :out, :id_property, type: :has_id_property, model_class: '::Property'
+  has_one :out, :id_property, type: :has_id_property, model_class: 'Property'
   has_many :out, :properties, type: :has_property
 
   has_many :both, :assocs, model_class: 'Model', rel_class: 'HasAssociation'
+
+  before_destroy :destroy_properties
 
   def to_param
     self.class_name.tableize
@@ -32,5 +34,12 @@ class Model < MetaModelBase
       end
 
     end
+  end
+
+  private
+
+  def destroy_properties
+    properties.each(&:destroy)
+    id_property.try(:destroy)
   end
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :meta do
-    resources :models, param: :class_name do
+    resources :models do
       collection do
         get :hierarchy
       end

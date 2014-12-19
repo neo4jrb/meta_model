@@ -11,12 +11,6 @@
     .col-sm-10
       view "select" contentBinding=models optionValuePath="content.id" optionLabelPath="content.class_name" selectionBinding="model.model.superclass_model" class="form-control"
 
-|||
-= model.model.isDirty
-|||
-= model.model.superclass_model
-|||
-
 .properties.row
   h2
     | Properties 
@@ -37,6 +31,9 @@
           .col-sm-2.control-label Type
           .col-sm-10
             view "select" content=property_types valueBinding="property.type" class="form-control"
+
+.form-group
+  button.btn.btn-danger.pull-right click="delete model.model" DELETE!
 
 .form-group
   button.btn.btn-primary click="save model.model" Update

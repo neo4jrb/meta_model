@@ -41,6 +41,13 @@ MetaModel.ModelsHierarchyRoute = Ember.Route.extend
     Ember.$.getJSON('/meta/models/hierarchy.json').then (data) ->
       data.models
 
+MetaModel.ModelsHierarchyController = Ember.Controller.extend
+  new_model_name: ''
+
+  actions:
+    add: (class_name) ->
+     @store.createRecord('model', class_name: @new_model_name).save().then (record) =>
+       @transitionToRoute 'models.edit', record
 
 
 MetaModel.Property = DS.Model.extend
@@ -70,7 +77,10 @@ MetaModel.ModelsEditRoute = Ember.Route.extend
       property.destroyRecord()
 
     save: (model) ->
-      model.save() if model.get 'isDirty'
+      model.save() #if model.get 'isDirty'
       model.get('properties').forEach (property) ->
         property.save() if property.get 'isDirty'
 
+    delete: (model) ->
+      model.destroyRecord().then =>
+       @transitionTo 'models.hierarchy'

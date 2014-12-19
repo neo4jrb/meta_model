@@ -27,32 +27,17 @@ module Meta
       @models = Model.all.order(:name)
     end
 
-    def update
-      @model.class_name = params[:model_data][:class_name]
-      @model.superclass_model = Model.where(class_name: params[:model_data][:superclass_model]).first
-      @model.save
+    def create
+      model = Model.create(model_params)
 
-      # Properties
-      specified_property_names = []
-      (params[:model_data][:properties] || []).each do |property_params|
-        name = property_params[:name]
-        specified_property_names << name
-
-        (@model.properties.where(name: name).first || Property.new(name: name, model: @model)).tap do |property|
-          property_params.each do |attribute, value|
-            property.write_attribute(attribute, value)
-          end
-        end.save
-      end
-      @model.properties(:property).query.where("NOT(property.name IN {names})").params(names: specified_property_names).pluck(:property).each(&:destroy)
-
-
-      redirect_to action: :edit, model: @model
+      render json: model
     end
 
     def update
-      logger.warn "model_params: #{model_params}"
-      @model.update(model_params)
+      model_params.each do |key, value|
+        @model.send("#{key}=", value)
+      end
+      @model.save
 
       render json: @model
     end
@@ -66,18 +51,24 @@ module Meta
     private
 
     def get_model
-      @model = Model.where(class_name: model_param_class_name).first if model_param_class_name
+      puts "model_param_class_name", model_param_class_name
+      @model = if model_param_class_name
+          Model.where(class_name: model_param_class_name).first
+        else
+          Model.find(params[:id])
+        end
     end
 
     def model_param_class_name
-      if params[:class_name]
-        @model_param_class_name ||= params[:class_name].classify
+      if params[:id]
+        @model_param_class_name ||= params[:id].classify.constantize
       end
+    rescue NameError
     end
 
     def model_params
       superclass_model = params[:model].delete(:superclass_model_id)
-      params.require(:model).permit(:class_name).merge(superclass_model: superclass_model)
+      params.require(:model).permit(:class_name, :superclass_model).merge(superclass_model: superclass_model)
     end
   end
 end
