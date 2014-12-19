@@ -1,0 +1,9 @@
+link-to "models.hierarchy" | Models
+
+ol.breadcrumb
+  li Home
+  li.active Data
+
+div.container
+  = outlet
+

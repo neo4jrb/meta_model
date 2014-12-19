@@ -1,7 +1,7 @@
 PATH
   remote: /Users/brian/github/neo4jrb/neo4j
   specs:
-    neo4j (4.0.0.rc.1)
+    neo4j (4.0.0.rc.3)
       active_attr (~> 0.8)
       activemodel (~> 4)
       activesupport (~> 4)
@@ -58,12 +58,21 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     barber (0.5.0)
       ember-source
       execjs
       handlebars-source (>= 1.0.0.rc.4)
+    barber-emblem (0.1.1)
+      barber (>= 0.4.1)
+      emblem-source
     builder (3.2.2)
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -71,6 +80,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     ember-data-source (1.0.0.beta.12)
       ember-source
     ember-rails (0.15.0)
@@ -84,19 +95,36 @@ GEM
       railties (>= 3.1)
     ember-source (1.8.1)
       handlebars-source (~> 1.0)
+    emblem-rails (0.2.1)
+      barber-emblem (~> 0.1.1)
+      ember-rails (>= 0.14.0)
+    emblem-source (0.3.17)
+    equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
+    grape (0.9.0)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack (>= 1.3.0)
+      rack-accept
+      rack-mount
+      virtus (>= 1.0.0)
     handlebars-source (1.3.0)
+    hashie (3.3.2)
     hike (1.2.3)
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     httpclient (2.5.3.3)
     i18n (0.6.11)
+    ice_nine (0.11.1)
     jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -120,6 +148,10 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.5.2)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.8)
@@ -178,6 +210,11 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    virtus (1.0.3)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     zip (2.0.2)
 
 PLATFORMS
@@ -187,6 +224,8 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   ember-rails
   ember-source (~> 1.8.1)
+  emblem-rails
+  grape
   jbuilder (~> 2.0)
   jquery-rails
   neo4j!

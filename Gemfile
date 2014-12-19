@@ -24,6 +24,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'ember-rails'
 gem 'ember-source', '~> 1.8.1'
+gem 'emblem-rails'
+
+gem 'grape'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -42,5 +45,5 @@ group :development do
 end
 
 
-gem "neo4j", path: '/Users/brian/github/neo4jrb/neo4j'
-gem "neo4j-core", path: '/Users/brian/github/neo4jrb/neo4j-core'
+gem "neo4j", path: '../neo4j'
+gem "neo4j-core", path: '../neo4j-core'

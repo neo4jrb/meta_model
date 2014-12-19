@@ -41,6 +41,10 @@ module MetaModel
     config.assets.precompile += %w( admin/models.js )
 
     config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
+
+#    binding.pry
+#     config.neo4j.include_root_in_json = false
+#    config.active_model.include_root_in_json = false
   end
 end
 

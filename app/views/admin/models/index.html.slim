@@ -1,9 +1,0 @@
-div.list-group
-  - last_level = nil
-  - hierarchical_render(@hierarchy) do |model, level|
-    = link_to edit_admin_model_path(model: model), class: 'list-group-item', style: "padding-left: #{20 * (level + 1)}px" do
-      = model.class_name
-      ul
-      - model.properties.each do |property|
-        li = property.name + "(#{property.type})"
-  

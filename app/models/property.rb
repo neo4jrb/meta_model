@@ -1,6 +1,4 @@
-class Property
-  include Neo4j::ActiveNode
-
+class Property < MetaModelBase
   property :name, type: String
   property :type, type: String
 

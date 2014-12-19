@@ -1,0 +1,11 @@
+link-to 'models.edit' model.class_name class="list-group-item"
+  = model.class_name
+  = model.level
+
+  ul
+    each property in model.properties
+      li #{property.name} (#{property.type})
+
+
+model-list node=sub_hierarchy
+
