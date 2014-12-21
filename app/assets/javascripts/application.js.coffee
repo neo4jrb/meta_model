@@ -22,7 +22,13 @@ MetaModel.PropertyAdapter = MetaModel.MetaModelAdapter.extend()
 MetaModel.Router.map ->
   @route 'index', path: "/"
 
-  @resource 'models', path: '/models', ->
+  @resource 'models', path: '/', ->
+    @route 'hierarchy', path: '/'
+    @route 'index', path: '/:class_name'
+    @route 'edit', path: "/:class_name/edit"
+
+
+  @resource 'meta-models', path: '/models', ->
     @route 'hierarchy', path: "/"
     @route 'edit', path: "/:class_name/edit"
 
@@ -36,19 +42,6 @@ MetaModel.FocusInputComponent = Ember.TextField.extend
   ).on('didInsertElement')
 
 
-MetaModel.ModelsHierarchyRoute = Ember.Route.extend
-  model: ->
-    Ember.$.getJSON('/meta/models/hierarchy.json').then (data) ->
-      data.models
-
-MetaModel.ModelsHierarchyController = Ember.Controller.extend
-  new_model_name: ''
-
-  actions:
-    add: (class_name) ->
-     @store.createRecord('model', class_name: @new_model_name).save().then (record) =>
-       @transitionToRoute 'models.edit', record
-
 
 MetaModel.Property = DS.Model.extend
   name: DS.attr 'string'
@@ -61,7 +54,36 @@ MetaModel.Model = DS.Model.extend
   #superclass_model: DS.attr 'string'
   properties: DS.hasMany 'Property'
 
-MetaModel.ModelsEditRoute = Ember.Route.extend
+
+
+
+MetaModel.MetaModelsHierarchyRoute = Ember.Route.extend
+  model: ->
+    Ember.$.getJSON('/meta/models/hierarchy.json').then (data) ->
+      data.models
+  actions:
+    goto_metamodel: (model) ->
+      console.log 'meta goto_metamodel'
+      @transitionTo 'meta-models.edit', record
+
+
+MetaModel.ModelsHierarchyRoute = MetaModel.MetaModelsHierarchyRoute.extend
+  actions:
+    goto_metamodel: (model) ->
+      console.log 'normal goto_metamodel'
+      @transitionTo 'models.index', record
+
+MetaModel.MetaModelsHierarchyController = Ember.Controller.extend
+  new_model_name: ''
+
+  actions:
+    add: (class_name) ->
+     @store.createRecord('model', class_name: @new_model_name).save().then (record) =>
+       @transitionToRoute 'meta-models.edit', record
+
+
+
+MetaModel.MetaModelsEditRoute = Ember.Route.extend
   model: (params) ->
     Ember.RSVP.hash
       model: @store.find 'model', params.class_name
@@ -83,4 +105,4 @@ MetaModel.ModelsEditRoute = Ember.Route.extend
 
     delete: (model) ->
       model.destroyRecord().then =>
-       @transitionTo 'models.hierarchy'
+       @transitionTo 'meta-models.hierarchy'

@@ -9,15 +9,6 @@ head
 
 body
 
-  nav.navbar.navbar-default role="navigation"
-    .container-fluid
-      ul.nav.navbar-nav
-        - {Records: meta_models_path, Admin: meta_root_path}.each do |text, path|
-          li class=(request.fullpath == path ? :active : '') = link_to text, path
-
-
-  .container
-    = yield
 
   = action_and_controller_javascript_include_tag
 

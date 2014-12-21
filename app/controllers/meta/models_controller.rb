@@ -30,6 +30,8 @@ module Meta
     def create
       model = Model.create(model_params)
 
+      create_models
+
       render json: model
     end
 
@@ -39,11 +41,15 @@ module Meta
       end
       @model.save
 
+      create_models
+
       render json: @model
     end
 
     def destroy
       @model.destroy
+
+      create_models
 
       render json: nil
     end

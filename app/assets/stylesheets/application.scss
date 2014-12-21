@@ -21,6 +21,14 @@
 }
 
 
+label {
+  width: 100%;
+}
+
+[data-ember-action] {
+  cursor: pointer;
+}
+
 // Stolen and SCSSized from http://bootsnipp.com/snippets/featured/accordion-list-group-menu
 .nested-list-group {
   >.list-group {

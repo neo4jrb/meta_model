@@ -1,4 +1,5 @@
 require './lib/meta_models.rb'
+create_models
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
