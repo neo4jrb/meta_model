@@ -1,4 +1,4 @@
-a.list-group-item click="goto_metamodel model"
+a.list-group-item click="clicked"
   = model.class_name
   = model.level
 

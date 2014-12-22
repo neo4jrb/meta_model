@@ -18,6 +18,10 @@ class Model < MetaModelBase
 #    properties(:p).pluck(p: :uuid)
 #  end
 
+  def has_associations
+    assocs.each_rel.to_a
+  end
+
   def self.hierarchically
     Hash.new.tap do |result|
       model_parents = Hash[*all.query_as(:model).optional_match("model-[:inherits_from]->(parent)").pluck(:model, :parent).flatten]

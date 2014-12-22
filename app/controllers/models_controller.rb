@@ -9,6 +9,10 @@ class ModelsController < ApplicationController
 
   def index
     @records = @model.all.to_a
+    respond_to do |format|
+      format.html
+      format.json { render json: @records, root: :records }
+    end
   end
 
   def show
@@ -21,6 +25,16 @@ class ModelsController < ApplicationController
     @record.update_attributes(params[:data])
 
     redirect_to action: :show
+  end
+
+  def new
+    @record = @model.new
+  end
+
+  def create
+    record = @model.create(params[:data])
+
+    redirect_to action: :show, id: record.id
   end
 
   private

@@ -8,8 +8,9 @@ Rails.application.routes.draw do
     end
     resources :properties
     resources :associations#, path: '/associations'#, param: :asso
-    root 'models#index'
   end
+
+  get '/meta' => 'meta#index'
 
 
   resources :models, path: '/:model'

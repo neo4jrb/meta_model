@@ -1,0 +1,6 @@
+- record.attributes.each do |key, value|
+  .form-group
+    label.control-label.col-sm-2 = key.humanize
+    .col-sm-10 = text_field_tag "data[#{key}]", value, class: 'form-control'
+
+

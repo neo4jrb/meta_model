@@ -1,11 +1,3 @@
-nav.navbar.navbar-default role="navigation"
-  .container-fluid
-    ul.nav.navbar-nav
-      = link-to 'models.hierarchy' tagName="li"
-        a href=view.href Models
-      = link-to 'meta-models.hierarchy' tagName="li"
-        a href=view.href Admin
-
 div.container
   = outlet
 

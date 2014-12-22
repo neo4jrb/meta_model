@@ -5,7 +5,7 @@ module Meta
     def index
       respond_to do |format|
         format.html { @hierarchy = Model.all.hierarchically }
-        format.json { render json: Model.all.to_a }
+        format.json { render json: Model.all }
       end
     end
 

@@ -5,10 +5,23 @@ head
 
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'application', 'data-turbolinks-track' => true
+
+  - if controller_name == 'meta/models'
+    = javascript_include_tag 'ember', 'data-turbolinks-track' => true
   = csrf_meta_tags
 
 body
+  nav.navbar.navbar-default role="navigation"
+    .container-fluid
+      ul.nav.navbar-nav
+        li
+          = link_to 'Models', root_path
 
+        li
+          = link_to 'Admin', meta_path
+
+  .container
+    = yield
 
   = action_and_controller_javascript_include_tag
 
